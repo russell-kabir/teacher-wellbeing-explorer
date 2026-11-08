@@ -1,0 +1,164 @@
+country,level,year,value
+Indonesia,Primary,1990,23.27
+Indonesia,Primary,1991,23.22
+Indonesia,Primary,1992,23.45
+Indonesia,Primary,1993,23.19
+Indonesia,Primary,1994,23.05
+Indonesia,Primary,1995,22.66
+Indonesia,Primary,1996,22.34
+Indonesia,Primary,1997,22.03
+Indonesia,Primary,1998,21.82
+Indonesia,Primary,1999,21.96
+Indonesia,Primary,2000,22.12
+Indonesia,Primary,2001,22.25
+Indonesia,Primary,2002,20.90
+Indonesia,Primary,2003,20.29
+Indonesia,Primary,2004,20.13
+Indonesia,Primary,2005,20.41
+Indonesia,Primary,2006,19.00
+Indonesia,Primary,2007,18.82
+Indonesia,Primary,2008,20.69
+Indonesia,Primary,2009,19.78
+Indonesia,Primary,2010,19.01
+Indonesia,Primary,2011,18.98
+Indonesia,Primary,2012,18.59
+Indonesia,Primary,2013,16.09
+Indonesia,Primary,2014,16.56
+Indonesia,Primary,2016,13.98
+Indonesia,Primary,2017,16.06
+Indonesia,Primary,2018,17.03
+Indonesia,Lower secondary,1995,15.73
+Indonesia,Lower secondary,1998,16.54
+Indonesia,Lower secondary,1999,16.31
+Indonesia,Lower secondary,2000,15.55
+Indonesia,Lower secondary,2001,15.07
+Indonesia,Lower secondary,2002,13.87
+Indonesia,Lower secondary,2003,14.98
+Indonesia,Lower secondary,2004,14.88
+Indonesia,Lower secondary,2005,12.89
+Indonesia,Lower secondary,2006,12.89
+Indonesia,Lower secondary,2007,13.66
+Indonesia,Lower secondary,2008,12.50
+Indonesia,Lower secondary,2009,13.05
+Indonesia,Lower secondary,2010,12.89
+Indonesia,Lower secondary,2011,14.26
+Indonesia,Lower secondary,2012,16.05
+Indonesia,Lower secondary,2013,14.39
+Indonesia,Lower secondary,2014,14.71
+Indonesia,Lower secondary,2016,13.90
+Indonesia,Lower secondary,2017,15.19
+Indonesia,Lower secondary,2018,15.42
+Indonesia,Upper secondary,1995,12.03
+Indonesia,Upper secondary,1998,12.67
+Indonesia,Upper secondary,1999,12.99
+Indonesia,Upper secondary,2000,13.11
+Indonesia,Upper secondary,2001,13.01
+Indonesia,Upper secondary,2002,13.14
+Indonesia,Upper secondary,2003,13.14
+Indonesia,Upper secondary,2004,13.21
+Indonesia,Upper secondary,2005,11.90
+Indonesia,Upper secondary,2006,11.39
+Indonesia,Upper secondary,2007,12.17
+Indonesia,Upper secondary,2008,11.24
+Indonesia,Upper secondary,2009,12.01
+Indonesia,Upper secondary,2010,11.28
+Indonesia,Upper secondary,2011,15.52
+Indonesia,Upper secondary,2012,17.42
+Indonesia,Upper secondary,2013,16.85
+Indonesia,Upper secondary,2014,16.58
+Indonesia,Upper secondary,2016,14.42
+Indonesia,Upper secondary,2017,15.50
+Indonesia,Upper secondary,2018,14.95
+Japan,Primary,2013,16.73
+Japan,Primary,2014,16.45
+Japan,Primary,2015,16.18
+Japan,Primary,2016,15.87
+Japan,Primary,2017,15.66
+Japan,Lower secondary,2013,12.96
+Japan,Lower secondary,2014,12.79
+Japan,Lower secondary,2015,12.64
+Japan,Lower secondary,2016,12.40
+Japan,Lower secondary,2017,12.28
+Japan,Upper secondary,2014,10.36
+Japan,Upper secondary,2015,10.39
+Japan,Upper secondary,2016,10.26
+Japan,Upper secondary,2017,10.20
+United States,Primary,2014,14.54
+United States,Primary,2015,14.46
+United States,Primary,2017,14.20
+United States,Lower secondary,2014,14.80
+United States,Lower secondary,2015,14.71
+United States,Lower secondary,2017,14.55
+United States,Upper secondary,2014,14.77
+United States,Upper secondary,2015,14.68
+United States,Upper secondary,2017,14.71
+Thailand,Primary,1990,20.27
+Thailand,Primary,1991,22.11
+Thailand,Primary,1992,20.13
+Thailand,Primary,1993,19.81
+Thailand,Primary,1994,20.52
+Thailand,Primary,1996,18.83
+Thailand,Primary,1998,18.73
+Thailand,Primary,1999,20.57
+Thailand,Primary,2000,20.79
+Thailand,Primary,2001,19.09
+Thailand,Primary,2002,18.56
+Thailand,Primary,2006,18.27
+Thailand,Primary,2007,17.72
+Thailand,Primary,2008,15.99
+Thailand,Primary,2010,16.26
+Thailand,Primary,2011,15.78
+Thailand,Primary,2012,16.28
+Thailand,Primary,2014,15.39
+Thailand,Primary,2015,16.88
+Thailand,Primary,2016,16.66
+Thailand,Primary,2017,16.89
+Thailand,Primary,2018,16.64
+Thailand,Lower secondary,2001,23.41
+Thailand,Lower secondary,2002,23.41
+Thailand,Lower secondary,2006,21.91
+Thailand,Lower secondary,2007,21.47
+Thailand,Lower secondary,2008,20.38
+Thailand,Lower secondary,2010,21.76
+Thailand,Lower secondary,2011,21.79
+Thailand,Lower secondary,2012,20.88
+Thailand,Lower secondary,2015,25.50
+Thailand,Lower secondary,2016,25.33
+Thailand,Lower secondary,2017,25.33
+Thailand,Lower secondary,2018,24.86
+Thailand,Upper secondary,2001,24.89
+Thailand,Upper secondary,2002,24.89
+Thailand,Upper secondary,2006,21.37
+Thailand,Upper secondary,2007,20.37
+Thailand,Upper secondary,2008,22.56
+Thailand,Upper secondary,2015,31.23
+Thailand,Upper secondary,2016,28.08
+Thailand,Upper secondary,2017,27.51
+Thailand,Upper secondary,2018,27.14
+OECD members,Lower secondary,1992,15.15
+OECD members,Lower secondary,1993,15.00
+OECD members,Lower secondary,1994,15.12
+OECD members,Lower secondary,1995,15.39
+OECD members,Lower secondary,1996,15.35
+OECD members,Lower secondary,1997,15.01
+OECD members,Lower secondary,1998,15.17
+OECD members,Lower secondary,1999,15.10
+OECD members,Lower secondary,2000,15.05
+OECD members,Lower secondary,2001,14.96
+OECD members,Lower secondary,2002,14.63
+OECD members,Lower secondary,2003,14.62
+OECD members,Lower secondary,2004,14.50
+OECD members,Lower secondary,2005,14.40
+OECD members,Lower secondary,2006,14.31
+OECD members,Lower secondary,2007,14.16
+OECD members,Lower secondary,2008,14.06
+OECD members,Lower secondary,2009,13.98
+OECD members,Lower secondary,2010,13.89
+OECD members,Lower secondary,2011,14.01
+OECD members,Lower secondary,2012,14.18
+OECD members,Lower secondary,2013,14.48
+OECD members,Lower secondary,2014,14.35
+OECD members,Lower secondary,2015,14.19
+OECD members,Lower secondary,2016,14.00
+OECD members,Lower secondary,2017,14.00
+OECD members,Lower secondary,2018,14.00
