@@ -27,7 +27,7 @@ from shinywidgets import output_widget, render_widget
 # ---------------------------------------------------------------------------
 # Configuration: paste the Apps Script web-app URL (ends in /exec) here.
 # ---------------------------------------------------------------------------
-BOARD_URL = ""
+BOARD_URL = "https://script.google.com/macros/s/AKfycbwYsqBszp0SDYlmRxSz5o7isqIEYZzbYKtT8ZJOg2l8Oas9dYKFRgkOyEBIMsSA7fHueA/exec"
 BOARD_CODE = "brite12"      # must match BOARD_CODE in apps_script/thursday_board.gs
 REFRESH_SECONDS = 15        # board refresh interval while the Class board is open
 ROOMS = 8
@@ -539,11 +539,14 @@ def breakout_server(input, output, session):
             f"Check in a week: {row['check']}",
             f"BRiTE: {codes}",
         ] if x))
-        if not BOARD_URL:
+        def save_locally(note):
             rows = [r for r in local_rows() if str(r["room"]) != str(row["room"])]
             rows.append(dict(row, time=datetime.now().isoformat(timespec="seconds")))
             local_rows.set(rows)
-            last_post.set((True, f"Saved for Room {row['room']}. This version keeps posts in your own browser, so please share it in the Zoom chat."))
+            last_post.set((True, note))
+
+        if not BOARD_URL:
+            save_locally(f"Saved for Room {row['room']}. This version keeps posts in your own browser, so please share it in the Zoom chat.")
         else:
             params = dict(code=BOARD_CODE, op="add", room=row["room"], level=row["level"], issue=row["issue"],
                           themes=row["themes"], action_text=row["action"], support=row["support"],
@@ -554,11 +557,11 @@ def breakout_server(input, output, session):
                     verb = "updated" if res.get("updated") else "posted"
                     last_post.set((True, f"Room {row['room']} {verb}. Terima kasih! Open step 4 to see the board."))
                 else:
-                    last_post.set((False, f"The board refused the post: {res.get('error', 'unknown error')}"))
-                    return
-            except Exception as e:  # network, CORS, bad URL
-                last_post.set((False, f"Couldn't reach the board ({type(e).__name__}). Check the connection and try again."))
-                return
+                    save_locally(f"The class board didn't accept the post ({res.get('error', 'unknown error')}), so it's saved "
+                                 "in this browser. Please share it in the Zoom chat.")
+            except Exception as e:  # network, CORS, sign-in redirect, bad URL
+                save_locally(f"Couldn't reach the class board ({type(e).__name__}), so your post is saved in this browser. "
+                             "Please share it in the Zoom chat.")
         await refresh_board()
 
     # ---- Step 4 --------------------------------------------------------------
@@ -575,7 +578,10 @@ def breakout_server(input, output, session):
             else:
                 board_msg.set(f"Board error: {res.get('error', 'unknown')}")
         except Exception as e:
-            board_msg.set(f"Couldn't reach the board ({type(e).__name__}). Retrying…")
+            if not board_rows() or local_rows():
+                board_rows.set(list(local_rows()))
+            board_msg.set(f"Couldn't reach the class board ({type(e).__name__}); showing this browser's post. "
+                          "Please share it in the Zoom chat. Retrying…")
 
     @reactive.effect
     async def _poll():
