@@ -89,6 +89,14 @@ COMPARE = {
     "jp_Junior high": "Japan 2024 · junior high",
 }
 
+COPY_JS = (
+    "var t=document.getElementById('bk_copy_text');var b=this;"
+    "function done(){b.textContent='Copied \u2713 \u00b7 Tersalin';}"
+    "function fallback(){t.focus();t.select();try{document.execCommand('copy');done();}"
+    "catch(e){b.textContent='Select the text and copy it manually';}}"
+    "if(navigator.clipboard){navigator.clipboard.writeText(t.value).then(done,fallback);}else{fallback();}"
+)
+
 CSS = """
 .bk-steps .nav-link { font-weight:600; }
 .who-badge { display:inline-block; font-size:.72rem; font-weight:600; color:#fff; border-radius:999px;
@@ -266,8 +274,9 @@ def breakout_ui():
             ),
             ui.div(
                 ui.div(
-                    ui.tags.b("If your room re-posts, "),
-                    "the board keeps the latest post for that room number, so you can fix a typo or change your mind.",
+                    ui.tags.b("Reporter for your room? "),
+                    "After posting, press \u2018Copy for Zoom chat\u2019 and paste your room's action into the main Zoom chat. "
+                    "Re-posting replaces your earlier post, so you can fix a typo or change your mind.",
                     class_="prompt-box",
                 ),
                 ui.output_ui("bk_post_hint"),
@@ -479,13 +488,29 @@ def breakout_server(input, output, session):
             class_="bk-issue-card",
         )
 
+    posted_text = reactive.value("")
+
     @render.ui
     def bk_submit_status():
         lp = last_post()
         if lp is None:
             return None
         ok, msg = lp
-        return ui.p(msg, class_="mt-2 " + ("text-success" if ok else "text-danger"))
+        status = ui.p(msg, class_="mt-2 " + ("text-success" if ok else "text-danger"))
+        if not ok or not posted_text():
+            return status
+        return ui.div(
+            status,
+            ui.div(
+                ui.tags.b("Share it with everyone · Bagikan ke semua: "),
+                "copy your post and paste it into the Zoom chat.",
+                ui.tags.textarea(posted_text(), id="bk_copy_text", rows=6, readonly=True,
+                                 class_="form-control mt-2", style="font-size:.85rem"),
+                ui.tags.button("Copy for Zoom chat · Salin", type="button", class_="btn btn-outline-primary btn-sm mt-2",
+                               onclick=COPY_JS),
+                class_="prompt-box",
+            ),
+        )
 
     @reactive.effect
     @reactive.event(input.bk_submit)
@@ -505,11 +530,20 @@ def breakout_server(input, output, session):
             themes=", ".join(themes), action=action[:600], support=(input.bk_support() or "").strip()[:400],
             who=input.bk_who(), check=check[:300],
         )
+        codes = ", ".join(t.split(" · ")[0] for t in themes)
+        posted_text.set("\n".join(x for x in [
+            f"Room {row['room']} · {row['level']} · {row['issue']}",
+            f"Who needs to act: {WHO_SHORT[who_index(row['who'])]}",
+            f"Try: {row['action']}",
+            f"Support: {row['support']}" if row["support"] else "",
+            f"Check in a week: {row['check']}",
+            f"BRiTE: {codes}",
+        ] if x))
         if not BOARD_URL:
             rows = [r for r in local_rows() if str(r["room"]) != str(row["room"])]
             rows.append(dict(row, time=datetime.now().isoformat(timespec="seconds")))
             local_rows.set(rows)
-            last_post.set((True, f"Posted for Room {row['room']} (demo mode: saved in this browser only)."))
+            last_post.set((True, f"Saved for Room {row['room']}. This version keeps posts in your own browser, so please share it in the Zoom chat."))
         else:
             params = dict(code=BOARD_CODE, op="add", room=row["room"], level=row["level"], issue=row["issue"],
                           themes=row["themes"], action_text=row["action"], support=row["support"],
@@ -531,7 +565,7 @@ def breakout_server(input, output, session):
     async def refresh_board():
         if not BOARD_URL:
             board_rows.set(list(local_rows()))
-            board_msg.set("Demo mode: showing posts from this browser only.")
+            board_msg.set("This board shows your room's own post only. Share it in the Zoom chat so everyone can compare · Papan ini hanya menampilkan kiriman ruang Anda.")
             return
         try:
             res = await http_get_json(BOARD_URL + "?" + urllib.parse.urlencode(dict(code=BOARD_CODE, op="list")))
