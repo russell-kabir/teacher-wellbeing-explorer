@@ -14,6 +14,8 @@ import plotly.graph_objects as go
 from shiny import App, reactive, render, ui
 from shinywidgets import output_widget, render_widget
 
+from breakout import breakout_server, breakout_ui
+
 DATA = Path(__file__).parent / "data"
 
 
@@ -132,6 +134,7 @@ overview = ui.nav_panel(
         ui.tags.li(ui.tags.b("Occupational health:"), " Year-by-year national records: Japan's mental-illness sick leave and US teacher stress."),
         ui.tags.li(ui.tags.b("Burnout (MBI):"), " Published Maslach Burnout Inventory means, plus a converter for comparing scores fairly across different scales."),
         ui.tags.li(ui.tags.b("Well-being (PWB/MHC):"), " Keyes' flourishing–languishing model with an interactive classifier, plus Ryff's six dimensions."),
+        ui.tags.li(ui.tags.b("Breakout Lab:"), " Thursday's room activity: pick an issue or case, rebalance a teacher's week, and post your room's action to a shared class board."),
         ui.tags.li(ui.tags.b("Sources & caveats:"), " Where every number comes from, and what each one can't tell you."),
     ),
     ui.div(
@@ -428,7 +431,7 @@ and include its citation.
 )
 
 app_ui = ui.page_navbar(
-    overview, workforce, talis_tab, occ_tab, mbi_tab, wb_tab, sources_tab,
+    overview, workforce, talis_tab, occ_tab, mbi_tab, wb_tab, breakout_ui(), sources_tab,
     title="Teacher Well-being Explorer",
     id="nav",
     header=ui.tags.style(CSS),
@@ -444,6 +447,7 @@ app_ui = ui.page_navbar(
 # Server
 # ---------------------------------------------------------------------------
 def server(input, output, session):
+    breakout_server(input, output, session)
 
     # ---- Workforce -------------------------------------------------------
     @render_widget

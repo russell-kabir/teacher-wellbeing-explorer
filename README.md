@@ -12,12 +12,22 @@ The app runs entirely in the browser through [Shinylive](https://shiny.posit.co/
 | Occupational health | Japan MEXT mental-illness leave FY2015–2024; US RAND frequent job stress 2021–2026 | — |
 | Burnout (MBI) | Published MBI-ES means ± SD | POMP converter: rescale any MBI mean (any response format) to compare fairly |
 | Well-being (PWB / MHC) | Keyes MHC-SF flourishing / moderate / languishing in published teacher samples | Interactive Keyes diagnostic classifier (14 dimensions, presets) |
+| Breakout Lab | Thursday 12 Nov room activity (stress, burnout and resilience): BRiTE issues and fictional cases, a week rebalancer, and a shared class board | Week rebalancer shows hours freed and *who* controls them (me / team / school leader / Dinas); live class board grouped by who needs to act |
 | Sources & caveats | Full source list and limitations | — |
 
 ## Deploy on GitHub Pages
 The exported static site is in `docs/`. In the repository, go to **Settings → Pages → Build and deployment**, choose **Deploy from a branch**, then pick `main` and the `/docs` folder. The app will appear at `https://russell-kabir.github.io/teacher-wellbeing-explorer/`.
 
 To embed it in a Google Site, use **Insert → Embed → By URL** and paste the Pages URL.
+
+## Breakout Lab: connecting the shared class board
+Shinylive runs in each participant's browser, so the class board is stored in a Google Sheet through a small Apps Script web app (`apps_script/thursday_board.gs`).
+
+1. At script.google.com, create a project, paste `apps_script/thursday_board.gs`, and run `setup()`. This creates the Sheet (with a Board tab) and an optional backup Google Form.
+2. **Deploy → New deployment → Web app**, Execute as *Me*, access *Anyone*. Copy the URL ending in `/exec`.
+3. Paste it into `BOARD_URL` at the top of `app/breakout.py` and rebuild (below).
+
+With `BOARD_URL` empty, the tab runs in demo mode: posts stay in the participant's own browser. Before the session, run `clearTestResponses()` to wipe test posts. The session code (`BOARD_CODE`) must match in both files.
 
 ## Edit or add data
 Every figure lives in `app/data/*.csv`, one row per value, each with its source. To add a study (for example, a new Indonesian MBI-ES sample), add a row to `mbi_studies.csv` or `flourishing_studies.csv`, then rebuild:
